@@ -47,93 +47,287 @@ def add_feature2(X, feature_to_add):
 
 def main():
     parser = argparse.ArgumentParser(description='Descripción de tu script.')
-    parser.add_argument('-v1', '--v1', help='variable1')
-    parser.add_argument('-v2', '--v2', help='variable2')
-    parser.add_argument('-v3', '--v3', help='variable3')
+    #parser.add_argument('-v1', '--v1', help='variable1')
+    parser.add_argument('-v1', help='variable1')
+    parser.add_argument('-v2', help='variable2')
+    parser.add_argument('-v3', help='variable3')
+    parser.add_argument('-v4', help='variable4')
+
+
     args = parser.parse_args()
     print('*'*30)
     print('Comienza procesamiento de datos')
-    # Dataset con las características estilométricas
-    train_stylometry=pd.read_csv('Train/train_stylometry_S1.csv')
-    test_stylometry=pd.read_csv('Test/test_stylometry_S1.csv')
-    train_stylometry=train_stylometry.iloc[:,2:15]
-    test_stylometry=test_stylometry.iloc[:,2:15]
-    columns = list(train_stylometry.columns)
-    scaler = MinMaxScaler()
-    scaler.fit(train_stylometry[columns])
-    train_stylometry[columns] = scaler.transform(train_stylometry[columns])
-    test_stylometry[columns] = scaler.transform(test_stylometry[columns])
-    train_stylometry = train_stylometry.values 
-    test_stylometry=test_stylometry.values
 
-    # Dataset LLM Bert
-    train_bert=pd.read_csv('Train/train_subtask1bert-base-multilingual-cased.csv',header=None)
-    test_bert=pd.read_csv('Test/test_subtask1bert-base-multilingual-cased.csv',header=None)
-    train_bert=train_bert.values
-    test_bert=test_bert.values
+    modelos=args.v4
 
-    # Dataset LLM Multilingual_e5 
-    train_e5=pd.read_csv('Train/train_subtask1multilingual-e5-large.csv',header=None)
-    test_e5=pd.read_csv('Test/test_subtask1multilingual-e5-large.csv',header=None)
-    train_e5=train_e5.values
-    test_e5=test_e5.values
+    if str(modelos)=='all':
+        # Dataset con las características estilométricas
+        train_stylometry=pd.read_csv('Train/train_stylometry_S1.csv')
+        test_stylometry=pd.read_csv('Test/test_stylometry_S1.csv')
+        train_stylometry=train_stylometry.iloc[:,2:15]
+        test_stylometry=test_stylometry.iloc[:,2:15]
+        columns = list(train_stylometry.columns)
+        scaler = MinMaxScaler()
+        scaler.fit(train_stylometry[columns])
+        train_stylometry[columns] = scaler.transform(train_stylometry[columns])
+        test_stylometry[columns] = scaler.transform(test_stylometry[columns])
+        train_stylometry = train_stylometry.values 
+        test_stylometry=test_stylometry.values
+        
+        # Dataset LLM Bert
+        train_bert=pd.read_csv('Train/train_subtask1bert-base-multilingual-cased.csv',header=None)
+        test_bert=pd.read_csv('Test/test_subtask1bert-base-multilingual-cased.csv',header=None)
+        train_bert=train_bert.values
+        test_bert=test_bert.values
+        
+        # Dataset LLM Multilingual_e5 
+        train_e5=pd.read_csv('Train/train_subtask1multilingual-e5-large.csv',header=None)
+        test_e5=pd.read_csv('Test/test_subtask1multilingual-e5-large.csv',header=None)
+        train_e5=train_e5.values
+        test_e5=test_e5.values
+        
+        # Dataset LLM ajustado 
+        #finetuned_roberta=pd.read_csv('./train_subtask1xlm-roberta-base-finetuned-IberAuTexTification2024-7030-task1-v1.csv',header=None)
+        #x_finetuned=finetuned_roberta.values
     
-    # Dataset LLM ajustado 
-    #finetuned_roberta=pd.read_csv('./train_subtask1xlm-roberta-base-finetuned-IberAuTexTification2024-7030-task1-v1.csv',header=None)
-    #x_finetuned=finetuned_roberta.values
     
-    # Dataset original
-    train_data = pd.read_csv('Train/train_S1.csv')
-    test_data = pd.read_csv('Test/test_S1.csv')
-    train_data['label'] = np.where(train_data['label']=='generated',1,0)
-    test_data['label'] = np.where(test_data['label']=='generated',1,0)
-    X_train_data=train_data['text']
-    y_train_data=train_data['label']
-    X_test_data=test_data['text']
-    y_test_data=test_data['label']
+        # Dataset original
+        train_data = pd.read_csv('Train/train_S1.csv')
+        test_data = pd.read_csv('Test/test_S1.csv')
+        train_data['label'] = np.where(train_data['label']=='generated',1,0)
+        test_data['label'] = np.where(test_data['label']=='generated',1,0)
+        X_train_data=train_data['text']
+        y_train_data=train_data['label']
+        X_test_data=test_data['text']
+        y_test_data=test_data['label']
+        
+        ngram_range = eval(args.v1)
+        analyzer=str(args.v2)
+        min_df=int(args.v3)
+        
+        cv = CountVectorizer(ngram_range=ngram_range,analyzer=analyzer,min_df=min_df)
+        
+        # ENTRENAMIENTO 
+        X_train_cv = cv.fit_transform(X_train_data)
+        X_train_cv=add_feature1(X_train_cv,train_stylometry)
+        X_train_cv=add_feature1(X_train_cv,train_bert)
+        X_train_cv=add_feature1(X_train_cv,train_e5)
+        # Calculamos más características adicionales 
+        num_digits= X_train_data.str.count('\d')
+        num_stops = X_train_data.str.count('\s')    
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        X_train_cv = add_feature2(X_train_cv, num_stops)
     
-    ngram_range = eval(args.v1)
-    analyzer=str(args.v2)
-    min_df=int(args.v3)
+        # PRUEBA 
+        X_test_cv=cv.transform(X_test_data)
+        X_test_cv=add_feature1(X_test_cv,test_stylometry)
+        X_test_cv=add_feature1(X_test_cv,test_bert)
+        X_test_cv=add_feature1(X_test_cv,test_e5)
+        # Calculamos más características adicionales
+        num_digits_test= X_test_data.str.count('\d')
+        num_stops_test = X_test_data.str.count('\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
     
-    cv = CountVectorizer(ngram_range=ngram_range,analyzer=analyzer,min_df=min_df)
+        print('Termina procesamiento de datos')
+        print('*'*30)
+    elif str(modelos)=='sty+bert':
+        # Dataset con las características estilométricas
+        train_stylometry=pd.read_csv('Train/train_stylometry_S1.csv')
+        test_stylometry=pd.read_csv('Test/test_stylometry_S1.csv')
+        train_stylometry=train_stylometry.iloc[:,2:15]
+        test_stylometry=test_stylometry.iloc[:,2:15]
+        columns = list(train_stylometry.columns)
+        scaler = MinMaxScaler()
+        scaler.fit(train_stylometry[columns])
+        train_stylometry[columns] = scaler.transform(train_stylometry[columns])
+        test_stylometry[columns] = scaler.transform(test_stylometry[columns])
+        train_stylometry = train_stylometry.values 
+        test_stylometry=test_stylometry.values
+        
+        # Dataset LLM Bert
+        train_bert=pd.read_csv('Train/train_subtask1bert-base-multilingual-cased.csv',header=None)
+        test_bert=pd.read_csv('Test/test_subtask1bert-base-multilingual-cased.csv',header=None)
+        train_bert=train_bert.values
+        test_bert=test_bert.values
+        # Dataset original
+        train_data = pd.read_csv('Train/train_S1.csv')
+        test_data = pd.read_csv('Test/test_S1.csv')
+        train_data['label'] = np.where(train_data['label']=='generated',1,0)
+        test_data['label'] = np.where(test_data['label']=='generated',1,0)
+        X_train_data=train_data['text']
+        y_train_data=train_data['label']
+        X_test_data=test_data['text']
+        y_test_data=test_data['label']
+        
+        ngram_range = eval(args.v1)
+        analyzer=str(args.v2)
+        min_df=int(args.v3)
+        
+        cv = CountVectorizer(ngram_range=ngram_range,analyzer=analyzer,min_df=min_df)
+        
+        # ENTRENAMIENTO 
+        X_train_cv = cv.fit_transform(X_train_data)
+        X_train_cv=add_feature1(X_train_cv,train_stylometry)
+        X_train_cv=add_feature1(X_train_cv,train_bert)
+        # Calculamos más características adicionales 
+        num_digits= X_train_data.str.count('\d')
+        num_stops = X_train_data.str.count('\s')    
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        X_train_cv = add_feature2(X_train_cv, num_stops)
     
-    # ENTRENAMIENTO 
-    X_train_cv = cv.fit_transform(X_train_data)
-    X_train_cv=add_feature1(X_train_cv,train_stylometry)
-    X_train_cv=add_feature1(X_train_cv,train_bert)
-    X_train_cv=add_feature1(X_train_cv,train_e5)
-    # Calculamos más características adicionales 
-    num_digits= X_train_data.str.count('\d')
-    num_stops = X_train_data.str.count('\s')    
-    # Y las agregamos a nuestros datos 
-    X_train_cv = add_feature2(X_train_cv, num_digits)
-    X_train_cv = add_feature2(X_train_cv, num_stops)
+        # PRUEBA 
+        X_test_cv=cv.transform(X_test_data)
+        X_test_cv=add_feature1(X_test_cv,test_stylometry)
+        X_test_cv=add_feature1(X_test_cv,test_bert)
+        # Calculamos más características adicionales
+        num_digits_test= X_test_data.str.count('\d')
+        num_stops_test = X_test_data.str.count('\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Termina procesamiento de datos')
+        print('*'*30)
 
-    # PRUEBA 
-    X_test_cv=cv.transform(X_test_data)
-    X_test_cv=add_feature1(X_test_cv,test_stylometry)
-    X_test_cv=add_feature1(X_test_cv,test_bert)
-    X_test_cv=add_feature1(X_test_cv,test_e5)
-    # Calculamos más características adicionales
-    num_digits_test= X_test_data.str.count('\d')
-    num_stops_test = X_test_data.str.count('\s')
-    # Y las agregamos a nuestros datos
-    X_test_cv = add_feature2(X_test_cv, num_digits_test)
-    X_test_cv = add_feature2(X_test_cv, num_stops_test)
-
-    print('Termina procesamiento de datos')
-    print('*'*30)
+    elif str(modelos)=='sty+e5':
+        # Dataset con las características estilométricas
+        train_stylometry=pd.read_csv('Train/train_stylometry_S1.csv')
+        test_stylometry=pd.read_csv('Test/test_stylometry_S1.csv')
+        train_stylometry=train_stylometry.iloc[:,2:15]
+        test_stylometry=test_stylometry.iloc[:,2:15]
+        columns = list(train_stylometry.columns)
+        scaler = MinMaxScaler()
+        scaler.fit(train_stylometry[columns])
+        train_stylometry[columns] = scaler.transform(train_stylometry[columns])
+        test_stylometry[columns] = scaler.transform(test_stylometry[columns])
+        train_stylometry = train_stylometry.values 
+        test_stylometry=test_stylometry.values
+    
+        
+        # Dataset LLM Multilingual_e5 
+        train_e5=pd.read_csv('Train/train_subtask1multilingual-e5-large.csv',header=None)
+        test_e5=pd.read_csv('Test/test_subtask1multilingual-e5-large.csv',header=None)
+        train_e5=train_e5.values
+        test_e5=test_e5.values
+        
+        # Dataset LLM ajustado 
+        #finetuned_roberta=pd.read_csv('./train_subtask1xlm-roberta-base-finetuned-IberAuTexTification2024-7030-task1-v1.csv',header=None)
+        #x_finetuned=finetuned_roberta.values
+    
+    
+        # Dataset original
+        train_data = pd.read_csv('Train/train_S1.csv')
+        test_data = pd.read_csv('Test/test_S1.csv')
+        train_data['label'] = np.where(train_data['label']=='generated',1,0)
+        test_data['label'] = np.where(test_data['label']=='generated',1,0)
+        X_train_data=train_data['text']
+        y_train_data=train_data['label']
+        X_test_data=test_data['text']
+        y_test_data=test_data['label']
+        
+        ngram_range = eval(args.v1)
+        analyzer=str(args.v2)
+        min_df=int(args.v3)
+        
+        cv = CountVectorizer(ngram_range=ngram_range,analyzer=analyzer,min_df=min_df)
+        
+        # ENTRENAMIENTO 
+        X_train_cv = cv.fit_transform(X_train_data)
+        X_train_cv=add_feature1(X_train_cv,train_stylometry)
+        X_train_cv=add_feature1(X_train_cv,train_e5)
+        # Calculamos más características adicionales 
+        num_digits= X_train_data.str.count('\d')
+        num_stops = X_train_data.str.count('\s')    
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+    
+        # PRUEBA 
+        X_test_cv=cv.transform(X_test_data)
+        X_test_cv=add_feature1(X_test_cv,test_stylometry)
+        X_test_cv=add_feature1(X_test_cv,test_e5)
+        # Calculamos más características adicionales
+        num_digits_test= X_test_data.str.count('\d')
+        num_stops_test = X_test_data.str.count('\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+    
+        print('Termina procesamiento de datos')
+        print('*'*30)
+    elif str(modelos)=='e5+bert':
+    
+        # Dataset LLM Bert
+        train_bert=pd.read_csv('Train/train_subtask1bert-base-multilingual-cased.csv',header=None)
+        test_bert=pd.read_csv('Test/test_subtask1bert-base-multilingual-cased.csv',header=None)
+        train_bert=train_bert.values
+        test_bert=test_bert.values
+        
+        # Dataset LLM Multilingual_e5 
+        train_e5=pd.read_csv('Train/train_subtask1multilingual-e5-large.csv',header=None)
+        test_e5=pd.read_csv('Test/test_subtask1multilingual-e5-large.csv',header=None)
+        train_e5=train_e5.values
+        test_e5=test_e5.values
+        
+        # Dataset LLM ajustado 
+        #finetuned_roberta=pd.read_csv('./train_subtask1xlm-roberta-base-finetuned-IberAuTexTification2024-7030-task1-v1.csv',header=None)
+        #x_finetuned=finetuned_roberta.values
+    
+    
+        # Dataset original
+        train_data = pd.read_csv('Train/train_S1.csv')
+        test_data = pd.read_csv('Test/test_S1.csv')
+        train_data['label'] = np.where(train_data['label']=='generated',1,0)
+        test_data['label'] = np.where(test_data['label']=='generated',1,0)
+        X_train_data=train_data['text']
+        y_train_data=train_data['label']
+        X_test_data=test_data['text']
+        y_test_data=test_data['label']
+        
+        ngram_range = eval(args.v1)
+        analyzer=str(args.v2)
+        min_df=int(args.v3)
+        
+        cv = CountVectorizer(ngram_range=ngram_range,analyzer=analyzer,min_df=min_df)
+        
+        # ENTRENAMIENTO 
+        X_train_cv = cv.fit_transform(X_train_data)
+        X_train_cv=add_feature1(X_train_cv,train_bert)
+        X_train_cv=add_feature1(X_train_cv,train_e5)
+        # Calculamos más características adicionales 
+        num_digits= X_train_data.str.count('\d')
+        num_stops = X_train_data.str.count('\s')    
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+    
+        # PRUEBA 
+        X_test_cv=cv.transform(X_test_data)
+        X_test_cv=add_feature1(X_test_cv,test_bert)
+        X_test_cv=add_feature1(X_test_cv,test_e5)
+        # Calculamos más características adicionales
+        num_digits_test= X_test_data.str.count('\d')
+        num_stops_test = X_test_data.str.count('\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+    
+        print('Termina procesamiento de datos')
+        print('*'*30)
 
     modelo_xgb = xgb.XGBClassifier()
     print('Comienza el entrenamiento')
     modelo_xgb.fit(X_train_cv, y_train_data)
     print('Finaliza entrenamiento')
+    print('*'*30)
     predictions = modelo_xgb.predict(X_test_cv)
     score=f1_score(y_test_data,predictions, average='macro')
     confusion = confusion_matrix(y_test_data,predictions)
     with open('./Resultados_xgboost_S1.txt', 'a') as archivo:
-        archivo.write(f'Parámetros: \n ngram_range: {ngram_range} \n analyzer: {analyzer} \n mind_df: {min_df} \n f1_score: {score} \n')
+        archivo.write(f'Parámetros: \n Datasets:{modelos} \n ngram_range: {ngram_range} \n analyzer: {analyzer} \n mind_df: {min_df} \n f1_score: {score} \n')
     
 
 if __name__ == "__main__":
