@@ -13,17 +13,12 @@ from sklearn import metrics
 import nltk
 from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn import datasets
-from sklearn.model_selection import cross_val_score
-from sklearn.svm import SVC, LinearSVC
-import xgboost as xgb
 from sklearn.datasets import make_hastie_10_2
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import MinMaxScaler
 import argparse
-
+from sklearn.svm import LinearSVC
 # Función para añadir más de una característica
 def add_feature1(X, feature_to_add):
     """
@@ -317,20 +312,18 @@ def main():
     
         print('Termina procesamiento de datos')
         print('*'*30)
-    bests= {'gamma': 0, 'learning_rate': 0.2, 'max_depth': 6, 'n_estimators': 200}
 
-    modelo_xgb = xgb.XGBClassifier(**bests)
+    modelo_svc = LinearSVC(random_state=42)    
     print('Comienza el entrenamiento')
-    modelo_xgb.fit(X_train_cv, y_train_data)
+    modelo_svc.fit(X_train_cv, y_train_data)
     print('Finaliza entrenamiento')
     print('*'*30)
-    predictions = modelo_xgb.predict(X_test_cv)
+    predictions = modelo_svc.predict(X_test_cv)
     score=f1_score(y_test_data,predictions, average='macro')
     confusion = confusion_matrix(y_test_data,predictions)
-    with open('./Resultados_xgboost_S1.txt', 'a') as archivo:
+    with open('./Resultados_SVC_S1.txt', 'a') as archivo:
         archivo.write(f'Parámetros: \n Datasets:{modelos} \n ngram_range: {ngram_range} \n analyzer: {analyzer} \n mind_df: {min_df} \n f1_score: {score} \n')
     
 
 if __name__ == "__main__":
     main()
-
