@@ -1,0 +1,162 @@
+# Importamos las bibliotecas a usar
+import pandas as pd
+import numpy as np
+import warnings
+from matplotlib import style
+import seaborn as sns
+from sklearn.metrics import f1_score
+from sklearn import metrics
+import nltk
+import argparse
+import xgboost as xgb
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import SGDClassifier
+from sklearn.svm import LinearSVC
+from sklearn.ensemble import RandomForestClassifier
+
+# Función para añadir más de una característica
+def add_feature1(X, features_to_add):
+    """
+    Returns the sparse feature matrix X with an array 
+    of features feature_to_add added.
+    """
+    from scipy.sparse import csr_matrix, hstack
+    return hstack([X, csr_matrix(features_to_add)], 'csr')
+
+# Función para añadir una característica a la vez
+def add_feature2(X, feature_to_add):
+    """
+    Returns the sparse feature matrix X with a feature 
+    feature_to_add added.
+    """
+    from scipy.sparse import csr_matrix, hstack
+    return hstack([X, csr_matrix(feature_to_add).T], 'csr')
+        
+
+def main():
+    parser = argparse.ArgumentParser(description='Mejores modelos S1')
+    parser.add_argument('-v', help='variable1')
+    args = parser.parse_args()
+    modelo=str(args.v)
+
+    print('*'*30)
+    print('Comienza procesamiento de datos')
+
+    # Cargamos las características estilométricas y los vectores embeddings cls
+
+    #Dataset Stylometry
+    train_stylometry=pd.read_csv('Train_finales/stylometry_train_S1.csv')
+    test_stylometry=pd.read_csv('Test_finales/stylometry_test_S1.csv')
+    train_stylometry = train_stylometry.values 
+    test_stylometry=test_stylometry.values
+    print('Stylometry listo!')
+    
+    #Dataset LLM Bert
+    train_bert=pd.read_csv('Train_finales/train_subtask1bert-base-multilingual-cased-finetuned-autext24.csv',header=None)
+    test_bert=pd.read_csv('Test_finales/test_subtask1bert-base-multilingual-cased-finetuned-autext24.csv',header=None)
+    train_bert=train_bert.values
+    test_bert=test_bert.values
+    print('LLM Bert listo!')
+    
+    # Dataset LLM Multilingual_e5
+    train_e5=pd.read_csv('Train_finales/train_subtask1multilingual-e5-large-finetuned-autext24.csv', header=None)
+    test_e5=pd.read_csv('Test_finales/test_subtask1multilingual-e5-large-finetuned-autext24.csv',header=None)
+    train_e5=train_e5.values
+    test_e5=test_e5.values
+    print('LLM E5 listo!')
+
+    #Dataset roberta
+    train_roberta=pd.read_csv('Train_finales/train_subtask1xlm-roberta-base-finetuned-autext24.csv',header=None)
+    test_roberta=pd.read_csv('Test_finales/test_subtask1xlm-roberta-base-finetuned-autext24.csv',header=None)
+    train_roberta=train_roberta.values
+    test_roberta=test_roberta.values
+    print('LLM Roberta listo!')
+
+
+    # Dataset original
+    train_data = pd.read_csv('Train_finales/train_S1.csv')
+    test_data = pd.read_csv('Test_finales/test_S1.csv')
+    train_data['label'] = np.where(train_data['label']=='generated',1,0)
+    test_data['label'] = np.where(test_data['label']=='generated',1,0)
+
+    X_train_data=train_data['text']
+    y_train_data=train_data['label']
+    
+    X_test_data=test_data['text']
+    y_test_data=test_data['label']
+
+    print(train_data.shape)
+    print(test_data.shape)
+    print('Datos originales, listos!')
+    
+        
+        
+    # Concatenamos los datos de entrenamiento 
+    X_train_cv=add_feature1(train_stylometry,train_bert)
+    X_train_cv=add_feature1(X_train_cv,train_e5)
+    X_train_cv=add_feature1(X_train_cv,train_roberta)
+    # Calculamos más características estilométricas adicionales 
+    num_digits= X_train_data.str.count('\d')
+    num_stops = X_train_data.str.count('\s')    
+    # Y las agregamos a nuestros datos 
+    X_train_cv = add_feature2(X_train_cv, num_digits)
+    X_train_cv = add_feature2(X_train_cv, num_stops)
+    print('Datos de entrenamiento listos!')
+
+    # Concatenamos los datos de prueba
+    X_test_cv=add_feature1(test_stylometry,test_bert)
+    X_test_cv=add_feature1(X_test_cv,test_e5)
+    X_test_cv=add_feature1(X_test_cv,test_roberta)
+    # Calculamos más características estilométricas adicionales
+    num_digits_test= X_test_data.str.count('\d')
+    num_stops_test = X_test_data.str.count('\s')
+    # Y las agregamos a nuestros datos
+    X_test_cv = add_feature2(X_test_cv, num_digits_test)
+    X_test_cv = add_feature2(X_test_cv, num_stops_test)
+    print('Datos de prueba listos!')
+
+    print('Termina procesamiento de datos')
+    print('*'*30)
+
+    #Definimos el modelo a usar y lo entrenamos  
+    print('Comienza el entrenamiento')
+    if modelo=='XGBOOST':
+        modelo_xgb = xgb.XGBClassifier(random_state=0)
+        modelo_xgb.fit(X_train_cv, y_train_data)
+        #Obtenemos las predicciones de nuestro modelo para el conjunto de prueba y calculamos el f1_score 
+        predictions = modelo_xgb.predict(X_test_cv)
+
+    elif modelo=='LR':
+        modelo_lr = LogisticRegression(random_state=0)
+        modelo_lr.fit(X_train_cv, y_train_data)
+        #Obtenemos las predicciones de nuestro modelo para el conjunto de prueba y calculamos el f1_score 
+        predictions = modelo_lr.predict(X_test_cv)
+
+    elif modelo=='SGD':
+        modelo_SGD = SGDClassifier(random_state=0)
+        modelo_SGD.fit(X_train_cv, y_train_data)
+        #Obtenemos las predicciones de nuestro modelo para el conjunto de prueba y calculamos el f1_score 
+        predictions = modelo_SGD.predict(X_test_cv)
+
+    elif modelo=='SVC':
+        modelo_svc = LinearSVC(random_state=0)
+        modelo_svc.fit(X_train_cv, y_train_data)
+        #Obtenemos las predicciones de nuestro modelo para el conjunto de prueba y calculamos el f1_score
+        predictions = modelo_svc.predict(X_test_cv)
+    
+    elif modelo=='RFC':
+        modelo_RFC = RandomForestClassifier(random_state=0)
+        modelo_RFC.fit(X_train_cv, y_train_data)
+        #Obtenemos las predicciones de nuestro modelo para el conjunto de prueba y calculamos el f1_score
+        predictions = modelo_RFC.predict(X_test_cv)
+
+    
+    print('Finaliza entrenamiento')
+    print('*'*30)
+
+    score=f1_score(y_test_data,predictions, average='macro')
+    print(score)
+
+
+if __name__ == "__main__":
+    main()
