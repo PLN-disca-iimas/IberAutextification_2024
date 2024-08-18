@@ -35,9 +35,12 @@ def add_feature2(X, feature_to_add):
 
 def main():
     parser = argparse.ArgumentParser(description='Mejores modelos S1')
-    parser.add_argument('-v', help='variable1')
+    parser.add_argument('-v', help='Modelo')
+    parser.add_argument('-T',help='Tipo de VE')
     args = parser.parse_args()
     modelo=str(args.v)
+    ve=str(args.T)
+    
 
     print('*'*30)
     print('Comienza procesamiento de datos')
@@ -89,31 +92,179 @@ def main():
     print(test_data.shape)
     print('Datos originales, listos!')
     
-        
-        
-    # Concatenamos los datos de entrenamiento 
-    X_train_cv=add_feature1(train_stylometry,train_bert)
-    X_train_cv=add_feature1(X_train_cv,train_e5)
-    X_train_cv=add_feature1(X_train_cv,train_roberta)
-    # Calculamos más características estilométricas adicionales 
-    num_digits= X_train_data.str.count('\d')
-    num_stops = X_train_data.str.count('\s')    
-    # Y las agregamos a nuestros datos 
-    X_train_cv = add_feature2(X_train_cv, num_digits)
-    X_train_cv = add_feature2(X_train_cv, num_stops)
-    print('Datos de entrenamiento listos!')
-
-    # Concatenamos los datos de prueba
-    X_test_cv=add_feature1(test_stylometry,test_bert)
-    X_test_cv=add_feature1(X_test_cv,test_e5)
-    X_test_cv=add_feature1(X_test_cv,test_roberta)
-    # Calculamos más características estilométricas adicionales
-    num_digits_test= X_test_data.str.count('\d')
-    num_stops_test = X_test_data.str.count('\s')
-    # Y las agregamos a nuestros datos
-    X_test_cv = add_feature2(X_test_cv, num_digits_test)
-    X_test_cv = add_feature2(X_test_cv, num_stops_test)
-    print('Datos de prueba listos!')
+    if ve=='sty_bert':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_stylometry,train_bert)
+        # Calculamos más características estilométricas adicionales 
+        num_digits= X_train_data.str.count(r'\d')
+        num_stops = X_train_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_stylometry,test_bert)
+        # Calculamos más características estilométricas adicionales
+        num_digits_test= X_test_data.str.count(r'\d')
+        num_stops_test = X_test_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Datos de prueba listos!')
+    elif ve=='sty_e5':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_stylometry,train_e5)
+        # Calculamos más características estilométricas adicionales 
+        num_digits= X_train_data.str.count(r'\d')
+        num_stops = X_train_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_stylometry,test_e5)
+        # Calculamos más características estilométricas adicionales
+        num_digits_test= X_test_data.str.count(r'\d')
+        num_stops_test = X_test_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Datos de prueba listos!')
+    elif ve=='sty_rob':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_stylometry,train_roberta)
+        # Calculamos más características estilométricas adicionales 
+        num_digits= X_train_data.str.count(r'\d')
+        num_stops = X_train_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_stylometry,test_roberta)
+        # Calculamos más características estilométricas adicionales
+        num_digits_test= X_test_data.str.count(r'\d')
+        num_stops_test = X_test_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Datos de prueba listos!')
+    elif ve=='bert_e5':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_bert,train_e5)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_bert,test_e5)
+        print('Datos de prueba listos!')
+    elif ve=='bert_rob':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_bert,train_roberta)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_bert,test_roberta)
+        print('Datos de prueba listos!')
+    elif ve=='e5_roberta':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_e5,train_roberta)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_e5,test_roberta)
+        print('Datos de prueba listos!')
+    elif ve=='sty_bert_e5':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_stylometry,train_bert)
+        X_train_cv=add_feature1(X_train_cv,train_e5)
+        # Calculamos más características estilométricas adicionales 
+        num_digits= X_train_data.str.count(r'\d')
+        num_stops = X_train_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_stylometry,test_bert)
+        X_test_cv=add_feature1(X_test_cv,test_e5)
+        # Calculamos más características estilométricas adicionales
+        num_digits_test= X_test_data.str.count(r'\d')
+        num_stops_test = X_test_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Datos de prueba listos!')
+    elif ve=='sty_bert_rob':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_stylometry,train_bert)
+        X_train_cv=add_feature1(X_train_cv,train_roberta)
+        # Calculamos más características estilométricas adicionales 
+        num_digits= X_train_data.str.count(r'\d')
+        num_stops = X_train_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_stylometry,test_bert)
+        X_test_cv=add_feature1(X_test_cv,test_roberta)
+        # Calculamos más características estilométricas adicionales
+        num_digits_test= X_test_data.str.count(r'\d')
+        num_stops_test = X_test_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Datos de prueba listos!')
+    elif ve=='sty_e5_rob':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_stylometry,train_e5)
+        X_train_cv=add_feature1(X_train_cv,train_roberta)
+        # Calculamos más características estilométricas adicionales 
+        num_digits= X_train_data.str.count(r'\d')
+        num_stops = X_train_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_stylometry,test_e5)
+        X_test_cv=add_feature1(X_test_cv,test_roberta)
+        # Calculamos más características estilométricas adicionales
+        num_digits_test= X_test_data.str.count(r'\d')
+        num_stops_test = X_test_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Datos de prueba listos!')
+    elif ve=='bert_e5_rob':
+        # Concatenamos los datos de entrenamiento  
+        X_train_cv=add_feature1(train_bert,train_e5)
+        X_train_cv=add_feature1(X_train_cv,train_roberta)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_bert,test_e5)
+        X_test_cv=add_feature1(X_test_cv,test_roberta)
+        print('Datos de prueba listos!')
+    elif ve=='sty_bert_e5_roberta':
+        # Concatenamos los datos de entrenamiento 
+        X_train_cv=add_feature1(train_stylometry,train_bert)
+        X_train_cv=add_feature1(X_train_cv,train_e5)
+        X_train_cv=add_feature1(X_train_cv,train_roberta)
+        # Calculamos más características estilométricas adicionales 
+        num_digits= X_train_data.str.count(r'\d')
+        num_stops = X_train_data.str.count(r'\s')    
+        # Y las agregamos a nuestros datos 
+        X_train_cv = add_feature2(X_train_cv, num_digits)
+        X_train_cv = add_feature2(X_train_cv, num_stops)
+        print('Datos de entrenamiento listos!')
+        # Concatenamos los datos de prueba
+        X_test_cv=add_feature1(test_stylometry,test_bert)
+        X_test_cv=add_feature1(X_test_cv,test_e5)
+        X_test_cv=add_feature1(X_test_cv,test_roberta)
+        # Calculamos más características estilométricas adicionales
+        num_digits_test= X_test_data.str.count(r'\d')
+        num_stops_test = X_test_data.str.count(r'\s')
+        # Y las agregamos a nuestros datos
+        X_test_cv = add_feature2(X_test_cv, num_digits_test)
+        X_test_cv = add_feature2(X_test_cv, num_stops_test)
+        print('Datos de prueba listos!')
 
     print('Termina procesamiento de datos')
     print('*'*30)
