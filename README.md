@@ -5,3 +5,11 @@ Identificación de texto generado por IA
 ## Datos
 El conjunto de entrenamiento se encuentra [aqui](https://drive.google.com/drive/folders/1VdTmKAzrfFrL-MKEmsvEXjYKugrm5Rw7?usp=share_link)
 Alli se puede almacenar cualquier cambio o procesamiento que se le haga al dataset
+
+## Modelos 
+
+En este repositorio se encuentran los experimentos realizados para la participación del equipo iimasNLP en las tareas compartidas de Identificación Automatizada de Textos en Lenguas de la Península Ibérica (IberAuTexTification 2024). 
+
+La primer subtask consiste en determinar si un texto ha sido generado automáticamente o no. La segunda subtask consiste en clasificar qué modelo lo generó. Una novedad en esta edición es detectar sobre un entorno multilingüe, además de que se han añadido más dominios y modelos. 
+
+En cada carpeta, para la subtask_1 y subtask_2, se encuentra un notebook que muestra la forma en la que se particionaron los datos de entrenamiento (70%) y prueba (30%), un script con el que se generaron los vectores embeddings de los tres modelos 'Fine-Tuneados' que utilizamos y, finalmente, un script que contiene todas las posibles configuraciones utilizadas para los experimentos, incluyendo la configuración que se utilizó para el modelo final. 
