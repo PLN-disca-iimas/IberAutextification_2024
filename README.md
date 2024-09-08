@@ -6,7 +6,7 @@ IberAuTexTification surge de la necesidad de desarrollar estrategias de moderaci
 
 En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en una clasificación binaria con dos clases: identificar si un texto fue escrito por un humano o generado por un LLM. La segunda sub-tarea es una clasificación multiclase en la que se busca identificar qué modelo generó el texto producido por un LLM. 
 
-# Metodología 
+# Metodología 💡 
 El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Redes Neuronales de Grafos (GNN), Modelos Multilingües de Gran Escala (LLM) y características estilométricas. 
 
 
