@@ -4,11 +4,12 @@ La nueva generación de los grandes modelos de lenguaje (LLMs) es capaz de gener
 
 IberAuTexTification surge de la necesidad de desarrollar estrategias de moderación efectivas y generalizables para enfrentar estos modelos, cada vez más sofisticados. Es la segunda versión de la tarea compartida AuTextification en IberLEF 2023, ampliada a tres dimensiones: más modelos, más dominios y más idiomas de la Península Ibérica.
 
-En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en una clasificación binaria con dos clases; identificar si un texto fue escrito por un humano o fue generado por un LLM. La segunda sub-tarea es una tarea de clasificación multiclase donde se busca identificar el modelo que generó el texto generado por LLMs. 
+En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en una clasificación binaria con dos clases: identificar si un texto fue escrito por un humano o generado por un LLM. La segunda sub-tarea es una clasificación multiclase en la que se busca identificar qué modelo generó el texto producido por un LLM. 
 
+# Metodología 
+El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Redes Neuronales de Grafos (GNN), Modelos Multilingües de Gran Escala (LLM) y características estilométricas. 
+  
 
-
-Identificación de texto generado por IA
 
 ## Datos
 El conjunto de entrenamiento se encuentra [aqui](https://drive.google.com/drive/folders/1VdTmKAzrfFrL-MKEmsvEXjYKugrm5Rw7?usp=share_link)
