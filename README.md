@@ -1,4 +1,4 @@
-# **IberAutextification 2024** :robot:
+# **IberAutextification 2024** :robot: :woman_light_skin_tone:
 # Introducción 
 La nueva generación de los grandes modelos de lenguaje (LLMs) es capaz de generar textos fluidos, coherentes y plausibles en muchos idiomas, volviéndose difícil de diferenciar del texto escrito por humanos. Esto ha generado la preocupación de que los LLMs puedan ser utilizados con fines maliciosos, como la generación de noticias falsas, la difusión de opiniones polarizadas o el aumento de la credibilidad de campañas de phishing, entre otros. Estos ataques pueden realizarse en diferentes idiomas, dominios, modelos o estrategias de generación, lo que dificulta su moderación.
 
@@ -8,7 +8,7 @@ En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en
 
 # Metodología 
 El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Redes Neuronales de Grafos (GNN), Modelos Multilingües de Gran Escala (LLM) y características estilométricas. 
-  
+
 
 
 ## Datos
