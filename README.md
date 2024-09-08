@@ -1,9 +1,8 @@
 # **IberAutextification 2024**
 # Introducción 
-La nueva generación de los grandes modelos de lenguaje (LLMs) son capaces de generar textos fluidos, coherentes y plausibles en muchos idiomas volviendose difíciles de diferenciar del texto escrito por humanos. Esto ha causado la preocupación de que los LLMs puedan ser utilizados con fines maliciosos, como generación de noticias falsas, difusión de opiniones polarizadas, aumento en la credibilidad de campañas de phishing, entre otros. Estos ataques pueden ser en diferentes idiomas, dominios, modelos o estrategias de generación lo que dificulta su moderación. 
+La nueva generación de los grandes modelos de lenguaje (LLMs) es capaz de generar textos fluidos, coherentes y plausibles en muchos idiomas, volviéndose difícil de diferenciar del texto escrito por humanos. Esto ha generado la preocupación de que los LLMs puedan ser utilizados con fines maliciosos, como la generación de noticias falsas, la difusión de opiniones polarizadas o el aumento de la credibilidad de campañas de phishing, entre otros. Estos ataques pueden realizarse en diferentes idiomas, dominios, modelos o estrategias de generación, lo que dificulta su moderación.
 
-IberAuTexTification surge de la necesidad de desarrollar estrategias de moderación efectivas y generalizables para enfrentar estos modelos que cada vez son más sofisticados. Es la segunda versión de la tarea compartida AuTextification en IberLEF 2023 ampliada a tres dimensiones: más modelos, más dominios y más idiomas de la Península Ibérica. 
-
+IberAuTexTification surge de la necesidad de desarrollar estrategias de moderación efectivas y generalizables para enfrentar estos modelos, que son cada vez más sofisticados. Es la segunda versión de la tarea compartida AuTextification en IberLEF 2023, ampliada a tres dimensiones: más modelos, más dominios y más idiomas de la Península Ibérica.
 
 
 Identificación de texto generado por IA
