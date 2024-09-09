@@ -12,8 +12,10 @@ El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Red
 ![Descripción de la imagen](https://drive.google.com/uc?export=view&id=1Zzm_o999lkIjJ1NZNQ_8NeghzvQORxaI)
 
 
+<img src="https://drive.google.com/uc?export=view&id=1Zzm_o999lkIjJ1NZNQ_8NeghzvQORxaI" alt="Descripción de la imagen" width="400"/>
 
-En este repositorio se presenta la arquitectura que emplea los LLMs junto con las características estilométricas, una de las tres arquitecturas presentadas en la tarea compartida. 
+
+En este repositorio se presenta la arquitectura que emplea los LLMs junto con las características estilométricas, una de las tres arquitecturas presentadas en las subtareas. 
 
 
 
