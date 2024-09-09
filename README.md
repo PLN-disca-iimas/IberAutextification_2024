@@ -18,12 +18,6 @@ El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Red
 
 ![Descripción de la imagen](https://drive.google.com/uc?export=view&id=1Zzm_o999lkIjJ1NZNQ_8NeghzvQORxaI)
 
-Este repositorio presenta la arquitectura que emplea los LLMs junto con las características estilométricas, una de las tres arquitecturas propuestas en las subtareas. En este modelo, primero se realiza un fine-tuning a tres modelos de gran escala (BERT-Base-Multilingual, Multilingual-E5-Large, XLM-RoBERTa-Base). Luego, una vez que los LLMs han sido ajustados, se extraen los vectores embeddings de la última capa de cada modelo. Esto se hace con el objetivo de capturar toda la información contextual contenida en estos vectores y concatenarla con características estilométricas extraídas directamente del corpus original.
+Este repositorio presenta la arquitectura que emplea los LLMs junto con las características estilométricas, una de las tres arquitecturas propuestas en las subtareas. En este modelo, primero se realiza un fine-tuning a tres modelos de gran escala (BERT-Base-Multilingual, Multilingual-E5-Large, XLM-RoBERTa-Base). Luego, una vez que los LLMs han sido ajustados, se extraen los vectores embeddings de la última capa de cada modelo. Esto se hace con el objetivo de capturar toda la información contextual contenida en estos vectores y concatenarla con características estilométricas extraídas directamente del corpus original. Finalmente, el vector resultante alimenta un modelo de machine learning tradicional: Stochastic Gradient Descent (SGD) para la primer subtarea y Support Vector Classification (SVC) para la segunda. 
 
-## Modelos 
 
-En este repositorio se encuentran los experimentos realizados para la participación del equipo iimasNLP en las tareas compartidas de Identificación Automatizada de Textos en Lenguas de la Península Ibérica (IberAuTexTification 2024). 
-
-La primer subtask consiste en determinar si un texto ha sido generado automáticamente o no. La segunda subtask consiste en clasificar qué modelo lo generó. Una novedad en esta edición es detectar sobre un entorno multilingüe, además de que se han añadido más dominios y modelos. 
-
-En cada carpeta, para la subtask_1 y subtask_2, se encuentra un notebook (Train_test_S1.ipynb/Train_test_S2.ipynb) que muestra la forma en la que se particionaron los datos de entrenamiento (70%) y prueba (30%), un script (LLM_S1.py/LLM_S2.py) con el que se generaron los vectores embeddings de los tres modelos 'Fine-Tuneados' que se utilizaron y, finalmente, un script (modelos_finales_S1.py/modelos_finales_S2.py) que contiene todas las posibles configuraciones utilizadas para los experimentos, incluyendo la configuración que se utilizó para el modelo final.
