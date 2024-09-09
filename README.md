@@ -27,7 +27,7 @@ Durante la etapa de desarrollo, se realizaron experimentos con diferentes arquit
 |-----------|-------------------------------------|----------|
 | Subtarea_1|        LogisticRegression (LR)      | 0.974962 |
 | Subtarea_1| Extreme Gradient Boosting (XGBOOST) | 0.974380 |
-| Subtarea_1|  Stochastic Gradient Descent (SGD)  | 0.975179 |
+| Subtarea_1|  **Stochastic Gradient Descent (SGD)**  | **0.975179** |
 | Subtarea_1| Support Vector Classification (SVC) | 0.974808 |
 | Subtarea_1|    Random Forest Classifier(RFC)    | 0.974850 |
 | Subtarea_2|        LogisticRegression (LR)      | 0.87914  |
