@@ -23,7 +23,7 @@ Este repositorio presenta la arquitectura que emplea los LLMs junto con las cara
 # Resultados 📊
 Durante la etapa de desarrollo, se realizaron experimentos con diferentes arquitecturas, comenzando inicialmente con modelos simples que consistían en utilizar únicamente modelos de machine learning tradicional. Al percatarse de que agregar características estilométricas y, por separado, que los vectores embeddings de los LLMs finetuneados mejoraban el rendimiento de estos modelos, dejamos de lado las arquitecturas simples y comenzamos a concatenar estos vectores con las características estilométricas para alimentar modelos de ML. A continuación, presentamos los resultados finales obtenidos con cada uno de los modelos de ML considerados.
 
----------------------
+ -------------------
 |     Subtarea_1    |  
 |-------------------|
 | Modelo | F1-Score |    
