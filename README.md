@@ -28,7 +28,7 @@ Durante la etapa de desarrollo, se realizaron experimentos con diferentes arquit
 |-------------------|
 | Modelo | F1-Score |    
 |--------|----------|
-|        |          | 
+|   LR   |   0.97   | 
 |        |          |   
 |        |          |  
 |        |          |
