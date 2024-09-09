@@ -9,10 +9,7 @@ En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en
 # Metodología 💡 
 El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Redes Neuronales de Grafos (GNN), Modelos Multilingües de Gran Escala (LLM) y características estilométricas. El diagrama de la arquitectura general de los modelos presentados en la tarea se muestra a continuación 
 
-
 ![Descripción de la imagen](https://drive.google.com/uc?export=view&id=1Zzm_o999lkIjJ1NZNQ_8NeghzvQORxaI)
-
-
 
 
 
