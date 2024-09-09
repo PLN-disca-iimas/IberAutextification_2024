@@ -8,7 +8,7 @@ En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en
 
 # Metodología 💡 
 ## Corpus 📄📄
-
+Para evitar que nuestros modelos presenten overfitting, realizamos una mezcla aleatoria del corpus de cada subtarea antes de dividirlo en conjuntos de entrenamiento y prueba. La división se realiza de manera estratificada, de modo que el 70% de los datos se asigna al conjunto de entrenamiento y el 30% restante al conjunto de validación, asegurando particiones bien equilibradas en ambos conjuntos. 
 
 ## Modelos 🧩🧩
 El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Redes Neuronales de Grafos (GNN), Modelos Multilingües de Gran Escala (LLM) y características estilométricas. El diagrama general de la arquitectura de los modelos presentados en las subtareas compartidas se muestra a continuación 
