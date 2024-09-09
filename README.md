@@ -20,13 +20,17 @@ El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Red
 
 Este repositorio presenta la arquitectura que emplea los LLMs junto con las características estilométricas, una de las tres arquitecturas propuestas en las subtareas. En este modelo, primero se realiza un fine-tuning a tres modelos de gran escala (BERT-Base-Multilingual, Multilingual-E5-Large, XLM-RoBERTa-Base). Luego, una vez que los LLMs han sido ajustados, se extraen los vectores embeddings de la última capa de cada modelo. Esto se hace con el objetivo de capturar toda la información contextual contenida en estos vectores y concatenarla con características estilométricas extraídas directamente del corpus original. Finalmente, el vector resultante alimenta un modelo de machine learning tradicional: Stochastic Gradient Descent (SGD) para la primer subtarea y Support Vector Classification (SVC) para la segunda. 
 
-# Resultados
+# Resultados 📊
 Durante la etapa de desarrollo, se realizaron experimentos con diferentes arquitecturas, comenzando inicialmente con modelos simples que consistían en utilizar únicamente modelos de machine learning tradicional. Al percatarse de que agregar características estilométricas y, por separado, que los vectores embeddings de los LLMs finetuneados mejoraban el rendimiento de estos modelos, dejamos de lado las arquitecturas simples y comenzamos a concatenar estos vectores con las características estilométricas para alimentar modelos de ML. A continuación, presentamos los resultados finales obtenidos con cada uno de los modelos de ML considerados.
 
-
-| Encabezado 1 | Encabezado 2 | Encabezado 3 |
-|--------------|--------------|--------------|
-| Celda 1      | Celda 2      | Celda 3      |
-| Celda 4      | Celda 5      | Celda 6      |
-| Celda 7      | Celda 8      | Celda 9      |
+     Subtarea_1
+|-------------------|
+| Modelo | F1-Score |    
+|--------|----------|
+|        |          | 
+|        |          |   
+|        |          |  
+|        |          |
+|        |          |    
+|        |          | 
 
