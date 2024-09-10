@@ -10,8 +10,8 @@ En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en
 ## Corpus 📄📄
 Para evitar que nuestros modelos presenten overfitting, realizamos una mezcla aleatoria del corpus de cada subtarea antes de dividirlo en conjuntos de entrenamiento y prueba. La división se realiza de manera estratificada, de modo que el 70% de los datos se asigna al conjunto de entrenamiento y el 30% restante al conjunto de validación, asegurando particiones bien equilibradas en ambos conjuntos. 
 
-El conjunto de entrenamiento se encuentra [aqui](https://drive.google.com/drive/folders/1VdTmKAzrfFrL-MKEmsvEXjYKugrm5Rw7?usp=share_link)
-Alli se puede almacenar cualquier cambio o procesamiento que se le haga al dataset
+El corpus se encuentra [aqui](https://drive.google.com/drive/folders/1VdTmKAzrfFrL-MKEmsvEXjYKugrm5Rw7?usp=share_link)
+Ahí se puede almacenar cualquier cambio o procesamiento que se le haga al dataset. 
 
 ## Modelos 🧩🧩
 El enfoque que nosotros adoptamos consiste en una arquitectura que incorpora Redes Neuronales de Grafos (GNN), Modelos Multilingües de Gran Escala (LLM) y características estilométricas. El diagrama general de la arquitectura de los modelos presentados en las subtareas compartidas se muestra a continuación 
@@ -35,6 +35,9 @@ Durante la etapa de desarrollo, se realizaron experimentos con diferentes arquit
 | Subtarea_2|  Stochastic Gradient Descent (SGD)  | 0.87499  |
 | **Subtarea_2**| **Support Vector Classification (SVC)** | **0.88247**  |
 | Subtarea_2|    Random Forest Classifier(RFC)    | 0.87382  |
+
+
+# Funcionamiento 
 
 
 
