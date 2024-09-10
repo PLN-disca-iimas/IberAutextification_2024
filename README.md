@@ -10,7 +10,7 @@ En IberAuTexTification 2024 se introducen dos sub-tareas. La primera consiste en
 ## Corpus 📄📄
 Para evitar que nuestros modelos presenten overfitting, realizamos una mezcla aleatoria del corpus de cada subtarea antes de dividirlo en conjuntos de entrenamiento y prueba. La división se realiza de manera estratificada, de modo que el 70% de los datos se asigna al conjunto de entrenamiento y el 30% restante al conjunto de validación, asegurando particiones bien equilibradas en ambos conjuntos. 
 
-El corpus se encuentra [aqui](https://drive.google.com/drive/folders/1VdTmKAzrfFrL-MKEmsvEXjYKugrm5Rw7?usp=share_link)
+El corpus se encuentra [aqui](https://drive.google.com/drive/folders/1VdTmKAzrfFrL-MKEmsvEXjYKugrm5Rw7?usp=share_link).
 Ahí se puede almacenar cualquier cambio o procesamiento que se le haga al dataset. 
 
 ## Modelos 🧩🧩
