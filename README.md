@@ -42,12 +42,12 @@ En esta sección se explica cómo se encuentran organizadas las distintas compon
 
 - **Train_Test_S1.ipynb**/**Train_Test_S2.ipynb**:
 
-Este notebook se utilizó para particionar de manera estratificada los datos en conjuntos de entrenamiento (70%) y prueba (30%). Es el primer
+Este notebook se utiliza para particionar de manera estratificada los datos en conjuntos de entrenamiento (70%) y prueba (30%). Es el primer
 archivo que se necesita ejecutar para poder continuar con lo demás. 
 
 - **LLM_S1.py**/**LLM_S2.py**:
 
-Este script se utilizó para extraer los vectores embeddings de los modelos fine-tuneados. Ya que se tienen los conjuntos de entrenamiento y prueba, lo siguiente es ingresarlos en este script. Como resultado, se generará un documento por cada modelo que contenga, para cada texto, su vector embedding. Una observación importante es que los corpus resultantes no contienen la etiqueta que clasifica el texto como escrito por humano o máquina. Sin embargo, mantienen el orden de los textos en el corpus original, por lo que es trivial recuperarla. 
+Este script se utiliza para extraer los vectores embeddings de los modelos fine-tuneados. Ya que se tienen los conjuntos de entrenamiento y prueba, lo siguiente es ingresarlos en este script. Como resultado, se generará un documento por cada modelo que contenga, para cada texto, su vector embedding. Una observación importante es que los corpus resultantes no contienen la etiqueta que clasifica el texto como escrito por humano o máquina. Sin embargo, mantienen el orden de los textos en el corpus original, por lo que es trivial recuperarla. 
 
 La forma de ejecutar este script es mediante la terminal. Requiere tener dos argumentos, la ruta del corpus y una variable que indique si se trata del conjunto de entrenamiento o prueba, es decir, a modo de ejemplo 
 
@@ -55,7 +55,11 @@ python LLM_S1.py -i 'ruta_hacia_el_corpus/train_S1.csv' -v1 0
 
 El valor cero indica que se trata del conjunto de entrenamiento. Cualquier otro valor que se coloque en lugar del cero indicará que se trata del conjunto de prueba. 
 
-- **stylometry_train_test_S1.ipynb**/**stylometry_train_test_S2.ipynb**:
+- **Stylometry_train_test_S1.ipynb**/**Stylometry_train_test_S2.ipynb**:
+
+A la par del script anterior, este notebook se ejecuta para extraer las características estilométricas del corpus de entrenamiento y prueba. 
+
+
 
 
 
