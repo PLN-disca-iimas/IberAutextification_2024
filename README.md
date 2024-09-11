@@ -55,7 +55,7 @@ python LLM_S1.py -i 'ruta_hacia_el_corpus/train_S1.csv' -v1 0
 
 El valor cero indica que se trata del conjunto de entrenamiento. Cualquier otro valor que se coloque en lugar del cero indicará que se trata del conjunto de prueba. 
 
-- **Stylometry_train_test_S1.ipynb**/**Stylometry_train_test_S2.ipynb**:
+- **Stylometry_Train_Test_S1.ipynb**/**Stylometry_Train_Test_S2.ipynb**:
 
 A la par del script anterior, este notebook se ejecuta para extraer las características estilométricas del corpus de entrenamiento y prueba. Para su funcionamiento requiere descargarse la librería Stylometry, que se puede encontrar en el siguiente [enlace](https://github.com/jpotts18/stylometry).
 
