@@ -51,5 +51,8 @@ Este script se utilizó para extraer los vectores embeddings de los modelos fine
 
 Una observación importante es que los corpus resultantes no contienen la etiqueta que clasifica el texto como escrito por humano o máquina. Sin embargo, mantienen el orden de los textos en el corpus original, por lo que es trivial recuperarla. 
 
-La forma de ejecutar este script es mediante la terminal. 
+La forma de ejecutar este script es mediante la terminal. Requiere tener dos argumentos, la ruta del corpus y una variable que indique si se trata del conjunto de entrenamiento o prueba:
+
+python LLM_S1.py -i 'ruta_hacia_el_corpus/train_Si.csv' -v1 0 
+   
 
