@@ -42,9 +42,14 @@ En esta sección se explica cómo se encuentran organizadas las distintas compon
 
 - **Train_Test_S1.ipynb**/**Train_Test_S2.ipynb**:
 
-Este notebook se utilizó para particionar de manera estratificada los datos en conjuntos de entrenamiento (70%) y prueba (30%).
+Este notebook se utilizó para particionar de manera estratificada los datos en conjuntos de entrenamiento (70%) y prueba (30%). Es el primer
+archivo que se necesita ejecutar para poder continuar con lo demás. 
 
-- 
+- **LLM_S1.py/LLM_S2.py**:
 
+Este script se utilizó para extraer los vectores embeddings de los modelos fine-tuneados. Ya que se tienen los conjuntos de entrenamiento y prueba, lo siguiente es ingresarlos en este script. Como resultado, se generará un documento por cada modelo que contenga, para cada texto, su vector embedding.
 
+Una observación importante es que los corpus resultantes no contienen la etiqueta que clasifica el texto como escrito por humano o máquina. Sin embargo, mantienen el orden de los textos en el corpus original, por lo que es trivial recuperarla. 
+
+La forma de ejecutar este script es mediante la terminal. 
 
