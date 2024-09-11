@@ -38,7 +38,10 @@ Durante la etapa de desarrollo, se realizaron experimentos con diferentes arquit
 
 
 # Funcionamiento ⚙️🔧
-En esta sección se explica cómo se encuentran organizadas las distintas componentes del modelo, tanto para la primer subtarea como para la segunda, y cómo hacerlo funcionar para replicar los resultados obtenidos durantes los experimentos. 
+En esta sección se explica cómo se encuentran organizadas las distintas componentes del modelo, tanto para la primer subtarea como para la segunda, y cómo hacerlo funcionar para replicar los resultados obtenidos durantes los experimentos. Lo primero que se debe notar es que cada subtarea tiene asociada una carpeta en donde hemos colocado los siguientes archivos: 
+
+- Train_Test_S1.ipynb: 
+- 
 
 
 
