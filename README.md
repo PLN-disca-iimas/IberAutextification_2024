@@ -57,9 +57,7 @@ El valor cero indica que se trata del conjunto de entrenamiento. Cualquier otro 
 
 - **Stylometry_train_test_S1.ipynb**/**Stylometry_train_test_S2.ipynb**:
 
-A la par del script anterior, este notebook se ejecuta para extraer las características estilométricas del corpus de entrenamiento y prueba. 
-
-
+A la par del script anterior, este notebook se ejecuta para extraer las características estilométricas del corpus de entrenamiento y prueba. Para su funcionamiento requiere descargarse la librería Stylometry, que se puede encontrar en el siguiente [enlace](https://github.com/jpotts18/stylometry).
 
 
 
