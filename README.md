@@ -42,7 +42,7 @@ En esta sección se explica cómo se encuentran organizadas las distintas compon
 
 - **Train_Test_S1.ipynb**/**Train_Test_S2.ipynb**:
 
-Este notebook fue utilizado para particionar los datos en los conjuntos de entrenamiento (70%) y prueba (30%) 
+Este notebook se utilizó para particionar de manera estratificada los datos en conjuntos de entrenamiento (70%) y prueba (30%).
 
 - 
 
