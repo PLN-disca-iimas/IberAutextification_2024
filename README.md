@@ -78,8 +78,14 @@ Los modelos que están incorporados son:
 Y las combinaciones que se pueden realizar son las siguientes:
 
 
-
-
-
-
-
+ 1. sty_bert: Características estilométricas con vector embedding del modelo BERT-Base-Multilingual
+ 2. sty_e5: Características estilométricas con vector embedding del modelo Multilingual-E5-Large
+ 3. sty_rob: Características estilométricas con vector embedding del modelo XLM-RoBERTa-Base
+ 4. bert_e5: Vectores embeddings de los modelos BERT-Base-Multilingual y Multilingual-E5-Large
+ 5. bert_rob: Vectores embeddings de los modelos BERT-Base-Multilingual y XLM-RoBERTa-Base
+ 6. e5_roberta: Vectores embeddings de los modelos Multilingual-E5-Large y XLM-RoBERTa-Base
+ 7. sty_bert_e5: Características estilométricas, y vectores embeddings de BERT-Base-Multilingual y Multilingual-E5-Large
+ 8. sty_bert_rob: Características estilométricas, y vectores embeddings de BERT-Base-Multilingual y XLM-RoBERTa-Base
+ 9. sty_e5_rob: Características estilométricas, y vectores embeddings de Multilingual-E5-Largel y XLM-RoBERTa-Base
+ 10. bert_e5_rob: Vectores embeddings de BERT-Base-Multilingual, Multilingual-E5-Large y XLM-RoBERTa-Base
+ 11. sty_bert_e5_roberta: Características estilométricas con vectores embeddings de BERT-Base-Multilingual, Multilingual-E5-Large y XLM-RoBERTa-Base
