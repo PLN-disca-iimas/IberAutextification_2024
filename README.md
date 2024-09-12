@@ -89,3 +89,7 @@ Y las combinaciones que se pueden realizar son las siguientes:
  9. **sty_e5_rob**: Características estilométricas, y vectores embeddings de Multilingual-E5-Largel y XLM-RoBERTa-Base
  10. **bert_e5_rob**: Vectores embeddings de BERT-Base-Multilingual, Multilingual-E5-Large y XLM-RoBERTa-Base
  11. **sty_bert_e5_roberta**: Características estilométricas con vectores embeddings de BERT-Base-Multilingual, Multilingual-E5-Large y XLM-RoBERTa-Base
+
+# Extras 📦
+
+En la carpeta con nombre **Otros Experimentos** se podrán encontrar otras técnicas empleadas con el fin de aumentar la complejidad y el rendimeinto del modelo.  
