@@ -29,7 +29,7 @@ Durante la etapa de desarrollo, se realizaron experimentos con diferentes arquit
 | Subtarea_1| Extreme Gradient Boosting (XGBOOST) | 0.974380 |
 | **Subtarea_1**|  **Stochastic Gradient Descent (SGD)**  | **0.975179** |
 | Subtarea_1| Support Vector Classification (SVC) | 0.974808 |
-| Subtarea_1|    Random Forest Classifier(RFC)    | 0.974850 |
+| Subtarea_1|    Random Forest Classifier (RFC)   | 0.974850 |
 | Subtarea_2|        LogisticRegression (LR)      | 0.87914  |
 | Subtarea_2| Extreme Gradient Boosting (XGBOOST) | 0.87893  |
 | Subtarea_2|  Stochastic Gradient Descent (SGD)  | 0.87499  |
@@ -47,9 +47,9 @@ archivo que se necesita ejecutar para poder continuar con lo demás.
 
 - **LLM_S1.py**/**LLM_S2.py**:
 
-Este script se utiliza para extraer los vectores embeddings de los modelos fine-tuneados. Ya que se tienen los conjuntos de entrenamiento y prueba, lo siguiente es ingresarlos en este script. Como resultado, se generará un documento por cada modelo que contenga, para cada texto, su vector embedding. Una observación importante es que los corpus resultantes no contienen la etiqueta que clasifica el texto como escrito por humano o máquina. Sin embargo, mantienen el orden de los textos en el corpus original, por lo que es trivial recuperarla. 
+Este script se utiliza para extraer los vectores embeddings de los modelos fine-tuneados. Ya que se tienen los conjuntos de entrenamiento y prueba, lo siguiente es ingresarlos a este script. Como resultado, se generará un documento por cada modelo que contenga, para cada texto, su vector embedding. Una observación importante es que los corpus resultantes no contienen la etiqueta que clasifica el texto en las disintas categorías de las subtareas. Sin embargo, mantienen el orden de los textos en los corpus originales, por lo que es trivial recuperarla. 
 
-La forma de ejecutar este script es mediante la terminal. Requiere tener dos argumentos, la ruta del corpus y una variable que indique si se trata del conjunto de entrenamiento o prueba, es decir, a modo de ejemplo 
+La forma de ejecutar este script es mediante la terminal. Requiere dos argumentos: la ruta del corpus y una variable que indique si se trata del conjunto de entrenamiento o prueba. A modo de ejemplo
 
 python LLM_S1.py -i 'ruta_hacia_el_corpus/train_S1.csv' -v1 0 
 
@@ -58,6 +58,26 @@ El valor cero indica que se trata del conjunto de entrenamiento. Cualquier otro 
 - **Stylometry_Train_Test_S1.ipynb**/**Stylometry_Train_Test_S2.ipynb**:
 
 A la par del script anterior, este notebook se ejecuta para extraer las características estilométricas del corpus de entrenamiento y prueba. Para su funcionamiento requiere descargarse la librería Stylometry, que se puede encontrar en el siguiente [enlace](https://github.com/jpotts18/stylometry).
+
+- **modelos_finales_S1.py**/**modelos_finales_S2.py**:
+
+Finalmente, es en este script donde concatenamos los vectores embeddings de cada modelo, las características estilométricas, y entrenamos un modelo de Machine Learning clásico. El código está diseñado para probar distintos modelos y distintas combinaciones, que van desde la concatenación de los vectores embeddings de dos modelos fine-tuneados, hasta la combinación de los tres junto con las características estilométricas, siendo este último el modelo final y definitivo con el que se participó. 
+
+La forma de ejecutar este script es mediante la terminal. Requiere dos argumentos: el modelo y la concatenación de embeddings que se quiere probar. A modo de ejemplo
+
+python modelos_finales_S1.py -v 'XGBOOST' -T 'sty_bert'
+
+Los modelos que están incorporados son:
+
+1. XGBOOST: Extreme Gradient Boosting
+2. LR: LogisticRegression
+3. SVC: Support Vector Classification
+4. SGD: Stochastic Gradient Descent
+5. RFC: Random Forest Classifier
+
+Y las combinaciones que se pueden realizar son las siguientes:
+
+
 
 
 
