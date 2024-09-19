@@ -1,1 +1,3 @@
 ## Agregar documentación de codigo
+
+- En el archivo Texto_a_graphs.ipynb se puede encontrar el codigo para .....
