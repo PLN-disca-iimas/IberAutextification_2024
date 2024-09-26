@@ -1,4 +1,4 @@
-## Agregar documentación de codigo
+## Información sobre los códigos
 
 - En el archivo [Texto_a_graphs.ipynb](https://github.com/PLN-disca-iimas/IberAutextification_2024/blob/main/Subtask_1/Otros%20Experimentos/Texto_a_graphs.ipynb) se puede encontrar el codigo para .....
 
