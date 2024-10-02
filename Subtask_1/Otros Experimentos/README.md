@@ -8,7 +8,7 @@
 
 NOTA: el archivo [Lista con métricas por texto (adicionales).ipynb](https://github.com/PLN-disca-iimas/IberAutextification_2024/blob/main/Subtask_1/Otros%20Experimentos/Lista%20con%20m%C3%A9tricas%20por%20texto%20(adicionales).ipynb) hace lo mismo que el archivo anterior (Lista con métricas por texto.ipynb), solamente cambian las métricas por *number_edges*, *number_nodes*, etc.
 
-- En el archivo [XGB-LR-RF.ipynb](https://github.com/YaraHR/Modelos-de-procesamiento-de-lenguaje-natural-SS-/blob/main/XGB-LR-RF.ipynb) se encuentra el código con distintos modelos de clasificación (*XGBoost*, *Logistic Regression* y *Random Forest*) los cuales han sido entrenados con métricas de grafos (obtenidas con el [código](https://github.com/PLN-disca-iimas/IberAutextification_2024/blob/main/Subtask_1/Otros%20Experimentos/Lista%20con%20m%C3%A9tricas%20por%20texto.ipynb)) para determinar si un texto es generado por máquina o por humano. Los resultados son:
+- En el archivo [XGB-LR-RF.ipynb](https://github.com/YaraHR/Modelos-de-procesamiento-de-lenguaje-natural-SS-/blob/main/XGB-LR-RF.ipynb) se encuentra el código con distintos modelos de clasificación (*XGBoost*, *Logistic Regression* y *Random Forest*) los cuales han sido entrenados con métricas de grafos (obtenidas con el [código](https://github.com/PLN-disca-iimas/IberAutextification_2024/blob/main/Subtask_1/Otros%20Experimentos/Lista%20con%20m%C3%A9tricas%20por%20texto.ipynb)) y estilométricas ([código](https://github.com/PLN-disca-iimas/IberAutextification_2024/blob/main/Subtask_1/stylometry_train_test_S1.ipynb)), para determinar si un texto es generado por máquina o por humano. Los resultados son:
 
 |                Modelo               | F1-Score |
 |-------------------------------------|----------|
