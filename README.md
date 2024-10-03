@@ -30,11 +30,13 @@ Durante la etapa de desarrollo, se realizaron [experimentos](https://docs.google
 | **Subtarea_1**|  **Stochastic Gradient Descent (SGD)**  | **0.975179** |
 | Subtarea_1| Support Vector Classification (SVC) | 0.974808 |
 | Subtarea_1|    Random Forest Classifier (RFC)   | 0.974850 |
+| Subtarea_1|Red Neuronal(RN) _Otros Experimentos_| 0.945925 |
 | Subtarea_2|        LogisticRegression (LR)      | 0.87914  |
 | Subtarea_2| Extreme Gradient Boosting (XGBOOST) | 0.87893  |
 | Subtarea_2|  Stochastic Gradient Descent (SGD)  | 0.87499  |
 | **Subtarea_2**| **Support Vector Classification (SVC)** | **0.88247**  |
 | Subtarea_2|    Random Forest Classifier(RFC)    | 0.87382  |
+| Subtarea_2|Red Neuronal(RN) _Otros Experimentos_| 0.999886 |
 
 
 # Funcionamiento ⚙️🔧
